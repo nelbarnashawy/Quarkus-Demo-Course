@@ -133,6 +133,7 @@ public class MovieController {
             movieRepository.deleteMovieById(id);
             return Response.ok(movieRepository.getMovies()).build();
         }
+
         return Response.status(Response.Status.NOT_FOUND).build();
     }
 
