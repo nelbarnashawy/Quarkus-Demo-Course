@@ -93,6 +93,11 @@
             <version>9.4.0.0</version>
         </dependency>
 
+        <!-- Rest Client -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-resteasy-client</artifactId>
+        </dependency>
 
 
 
