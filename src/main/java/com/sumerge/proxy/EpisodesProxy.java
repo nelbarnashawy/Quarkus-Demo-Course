@@ -12,7 +12,7 @@ import java.util.List;
 
 
 @Path("/shows")
-@RegisterRestClient
+@RegisterRestClient(baseUri = "https://api.tvmaze.com")
 public interface EpisodesProxy {
 
     @GET

@@ -19,8 +19,7 @@ api here ")
 
 @Path("/singlesearch")
 @Produces(MediaType.APPLICATION_JSON)
-//@RegisterRestClient(baseUri = "https://api.tvmaze.com")
-@RegisterRestClient
+@RegisterRestClient(baseUri = "https://api.tvmaze.com")
 public interface TvSeriesProxy {
 
     @GET
