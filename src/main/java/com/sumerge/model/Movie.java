@@ -1,6 +1,7 @@
 package com.sumerge.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,9 +18,12 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 public class Movie {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "movie_seq")
+    @SequenceGenerator(name = "movie_seq", sequenceName = "movies_sequence", allocationSize = 1)
     @Schema(required = true)
     private Long id;
+    
+    @NotNull
     @Schema(required = true)
     private String name;
 
