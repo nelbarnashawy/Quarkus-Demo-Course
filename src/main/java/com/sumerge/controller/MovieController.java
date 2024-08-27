@@ -5,6 +5,7 @@ import com.sumerge.mapper.MovieMapper;
 import com.sumerge.model.Movie;
 import com.sumerge.repository.MovieRepository;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -152,6 +153,46 @@ public class MovieController {
             LOGGER.info("Movie with id: " + id + " found and updated");
             movieToUpdate.setName(updatedTitle);
             movieRepository.updateMovie(movieToUpdate);
+            List<MovieDTO> moviesDto = movieRepository.getMovies().stream()
+                    .map(movieMapper::toDTO)
+                    .toList();
+            return Response.ok(moviesDto).build();
+        }
+        LOGGER.error("Movie with id: " + id + " not found");
+        return Response.status(Response.Status.NOT_FOUND).build();
+    }
+
+    @PUT
+    @Path("/{id}")
+    @Transactional
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Operation(
+            operationId = "updateMovieWithAnotherMovie", summary = "Update a movie with another Movie",
+            description = "Update a movie's with another Movie in the database"
+    )
+    @APIResponses(
+            {
+                    @APIResponse(
+                            responseCode = "200",
+                            description = "Movie updated successfully",
+                            content = @Content(mediaType = MediaType.APPLICATION_JSON)
+                    ),
+                    @APIResponse(
+                            responseCode = "404",
+                            description = "Movie not found"
+                    )
+            }
+    )
+    public Response updateMovieWithAnotherMovie(
+            @Parameter(description = "Updated movie", required = true) MovieDTO updatedMovie,
+            @Parameter(description = "ID of movie to be updated", required = true) @PathParam("id") Long id) {
+        LOGGER.info("Update a movie with id: " + id + " to the movie: " + updatedMovie.getName());
+        Movie movieToUpdate = movieRepository.getMovieById(id);
+        if (movieToUpdate != null) {
+            LOGGER.info("Movie with id: " + id + " found and updated");
+            Movie updatedMovieDao = movieMapper.toDAO(updatedMovie);
+            movieMapper.merge(movieToUpdate, updatedMovieDao);
             List<MovieDTO> moviesDto = movieRepository.getMovies().stream()
                     .map(movieMapper::toDTO)
                     .toList();
