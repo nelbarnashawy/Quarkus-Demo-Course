@@ -6,6 +6,9 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.eclipse.microprofile.config.Config;
+import org.eclipse.microprofile.config.ConfigProvider;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
@@ -19,11 +22,32 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 @Tag(name = "Movie Controller", description = "CRUD operations for movies")
 public class MovieController {
 
+    @Inject
+    @ConfigProperty(name = "config.message.inject", defaultValue = "Hello from controller! No message found in config")
+    String helloMessage;
+
     private final MovieRepository movieRepository;
 
     @Inject
     public MovieController(MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
+    }
+
+    @GET
+    @Path("/configInject")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String hello() {
+        return helloMessage;
+    }
+
+    @GET
+    @Path("/configProvider")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getMessageByConfigProviderOptional(){
+        Config config = ConfigProvider.getConfig();
+        String message = config.getOptionalValue("config.message.provider", String.class)
+                .orElse("Hello from controller! No message found in config");
+        return message;
     }
 
     @GET
