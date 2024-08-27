@@ -1,4 +1,4 @@
-package com.sumerge.controller;
+package com.sumerge;
 
 import io.quarkus.test.junit.QuarkusTest;
 import jakarta.json.Json;
