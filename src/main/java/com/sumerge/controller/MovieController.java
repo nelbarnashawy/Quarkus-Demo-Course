@@ -1,5 +1,7 @@
 package com.sumerge.controller;
 
+import com.sumerge.dto.MovieDTO;
+import com.sumerge.mapper.MovieMapper;
 import com.sumerge.model.Movie;
 import com.sumerge.repository.MovieRepository;
 import jakarta.inject.Inject;
@@ -19,6 +21,10 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.jboss.logging.Logger;
 
+import java.util.List;
+
+import static java.util.stream.Collectors.toList;
+
 @Path("/movies")
 @Tag(name = "Movie Controller", description = "CRUD operations for movies")
 public class MovieController {
@@ -29,11 +35,14 @@ public class MovieController {
     @ConfigProperty(name = "config.message.inject", defaultValue = "Hello from controller! No message found in config")
     String helloMessage;
 
+    private final MovieMapper movieMapper;
+
     private final MovieRepository movieRepository;
 
     @Inject
-    public MovieController(MovieRepository movieRepository) {
+    public MovieController(MovieRepository movieRepository, MovieMapper movieMapper) {
         this.movieRepository = movieRepository;
+        this.movieMapper = movieMapper;
     }
 
     @GET
@@ -47,7 +56,7 @@ public class MovieController {
     @GET
     @Path("/configProvider")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getMessageByConfigProviderOptional(){
+    public String getMessageByConfigProviderOptional() {
         LOGGER.info("Get a hello from config provider");
         Config config = ConfigProvider.getConfig();
         String message = config.getOptionalValue("config.message.provider", String.class)
@@ -65,7 +74,10 @@ public class MovieController {
     public Response getMovies() {
         LOGGER.debug("Should Not Appear! - Get all movies from the database");
         LOGGER.info("Get all movies from the database");
-        return Response.ok(movieRepository.getMovies()).build();
+        List<MovieDTO> moviesDto = movieRepository.getMovies().stream()
+                .map(movieMapper::toDTO)
+                .toList();
+        return Response.ok(moviesDto).build();
     }
 
     @GET
@@ -99,11 +111,15 @@ public class MovieController {
     public Response createMovie(@RequestBody(
             description = "The movie to create",
             required = true,
-            content = @Content(schema = @Schema(implementation = Movie.class))
-    ) Movie movie) {
-        LOGGER.info("Create a movie: " + movie.getName() + ", and saved it in the database");
+            content = @Content(schema = @Schema(implementation = MovieDTO.class))
+    ) MovieDTO movieDto) {
+        LOGGER.info("Create a movie: " + movieDto.getName() + ", and saved it in the database");
+        Movie movie = movieMapper.toDAO(movieDto);
         movieRepository.createMovie(movie);
-        return Response.status(Response.Status.CREATED).entity(movieRepository.getMovies()).build();
+        List<MovieDTO> moviesDto = movieRepository.getMovies().stream()
+                .map(movieMapper::toDTO)
+                .toList();
+        return Response.status(Response.Status.CREATED).entity(moviesDto).build();
     }
 
     @PUT
@@ -136,7 +152,10 @@ public class MovieController {
             LOGGER.info("Movie with id: " + id + " found and updated");
             movieToUpdate.setName(updatedTitle);
             movieRepository.updateMovie(movieToUpdate);
-            return Response.ok(movieRepository.getMovies()).build();
+            List<MovieDTO> moviesDto = movieRepository.getMovies().stream()
+                    .map(movieMapper::toDTO)
+                    .toList();
+            return Response.ok(moviesDto).build();
         }
         LOGGER.error("Movie with id: " + id + " not found");
         return Response.status(Response.Status.NOT_FOUND).build();
@@ -169,7 +188,10 @@ public class MovieController {
         if (movieRepository.getMovieById(id) != null) {
             LOGGER.info("Movie with id: " + id + " found and deleted");
             movieRepository.deleteMovieById(id);
-            return Response.ok(movieRepository.getMovies()).build();
+            List<MovieDTO> moviesDto = movieRepository.getMovies().stream()
+                    .map(movieMapper::toDTO)
+                    .toList();
+            return Response.ok(moviesDto).build();
         }
         LOGGER.error("Movie with id: " + id + " not found");
         return Response.status(Response.Status.NOT_FOUND).build();
