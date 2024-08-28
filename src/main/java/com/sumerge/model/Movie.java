@@ -1,8 +1,10 @@
 package com.sumerge.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 @Builder
@@ -20,7 +22,6 @@ public class Movie {
     @Schema(required = true)
     private Long id;
     
-    @NotNull
     @Schema(required = true)
     private String name;
 

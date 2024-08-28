@@ -6,6 +6,7 @@ import com.sumerge.model.Movie;
 import com.sumerge.repository.MovieRepository;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -113,7 +114,7 @@ public class MovieController {
             description = "The movie to create",
             required = true,
             content = @Content(schema = @Schema(implementation = MovieDTO.class))
-    ) MovieDTO movieDto) {
+    ) @Valid MovieDTO movieDto) {
         LOGGER.info("Create a movie: " + movieDto.getName() + ", and saved it in the database");
         Movie movie = movieMapper.toDAO(movieDto);
         movieRepository.createMovie(movie);

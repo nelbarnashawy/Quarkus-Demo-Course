@@ -1,18 +1,55 @@
-2024-08-27 21:09:19,482 nateff C:\Program Files\Java\graalvm-community-openjdk-21.0.2+13.1\bin\java.exe[13860] INFO  [io.quarkus] (Quarkus Main Thread) demo-course-project 1.0-SNAPSHOT on JVM (powered by Quarkus 3.13.3) started in 4.811s. Listening on: http://localhost:8080
-2024-08-27 21:09:19,486 nateff C:\Program Files\Java\graalvm-community-openjdk-21.0.2+13.1\bin\java.exe[13860] INFO  [io.quarkus] (Quarkus Main Thread) Profile dev activated. Live Coding activated.
-2024-08-27 21:09:19,487 nateff C:\Program Files\Java\graalvm-community-openjdk-21.0.2+13.1\bin\java.exe[13860] INFO  [io.quarkus] (Quarkus Main Thread) Installed features: [agroal, cdi, hibernate-orm, jdbc-postgresql, narayana-jta, resteasy, resteasy-client, resteasy-jackson, smallrye-context-propagation, smallrye-openapi, swagger-ui, vertx]
-2024-08-27 21:09:20,902 nateff C:\Program Files\Java\graalvm-community-openjdk-21.0.2+13.1\bin\java.exe[13860] INFO  [com.sum.con.MovieController] (executor-thread-1) Get all movies from the database
-2024-08-27 21:09:21,267 nateff C:\Program Files\Java\graalvm-community-openjdk-21.0.2+13.1\bin\java.exe[13860] INFO  [io.qua.htt.access-log] (executor-thread-1) 127.0.0.1 - - [27/Aug/2024:21:09:21 +0300] "GET /movies HTTP/1.1" 200 86
-2024-08-27 21:09:33,136 nateff C:\Program Files\Java\graalvm-community-openjdk-21.0.2+13.1\bin\java.exe[13860] INFO  [com.sum.con.MovieController] (executor-thread-1) Create a movie: MovieDto, and saved it in the database
-2024-08-27 21:09:33,185 nateff C:\Program Files\Java\graalvm-community-openjdk-21.0.2+13.1\bin\java.exe[13860] INFO  [io.qua.htt.access-log] (executor-thread-1) 127.0.0.1 - - [27/Aug/2024:21:09:33 +0300] "POST /movies HTTP/1.1" 201 106
-2024-08-27 21:09:39,197 nateff C:\Program Files\Java\graalvm-community-openjdk-21.0.2+13.1\bin\java.exe[13860] INFO  [com.sum.con.MovieController] (executor-thread-1) Get all movies from the database
-2024-08-27 21:09:39,205 nateff C:\Program Files\Java\graalvm-community-openjdk-21.0.2+13.1\bin\java.exe[13860] INFO  [io.qua.htt.access-log] (executor-thread-1) 127.0.0.1 - - [27/Aug/2024:21:09:39 +0300] "GET /movies HTTP/1.1" 200 106
-2024-08-27 21:09:53,154 nateff C:\Program Files\Java\graalvm-community-openjdk-21.0.2+13.1\bin\java.exe[13860] INFO  [com.sum.con.MovieController] (executor-thread-1) Get the number of movies in the database
-2024-08-27 21:09:53,160 nateff C:\Program Files\Java\graalvm-community-openjdk-21.0.2+13.1\bin\java.exe[13860] INFO  [io.qua.htt.access-log] (executor-thread-1) 127.0.0.1 - - [27/Aug/2024:21:09:53 +0300] "GET /movies/size HTTP/1.1" 200 1
-2024-08-27 21:10:13,653 nateff C:\Program Files\Java\graalvm-community-openjdk-21.0.2+13.1\bin\java.exe[13860] INFO  [com.sum.con.MovieController] (executor-thread-1) Update a movie with id: 4 to title: UpdatedFourthMovie
-2024-08-27 21:10:13,676 nateff C:\Program Files\Java\graalvm-community-openjdk-21.0.2+13.1\bin\java.exe[13860] INFO  [com.sum.con.MovieController] (executor-thread-1) Movie with id: 4 found and updated
-2024-08-27 21:10:13,712 nateff C:\Program Files\Java\graalvm-community-openjdk-21.0.2+13.1\bin\java.exe[13860] INFO  [io.qua.htt.access-log] (executor-thread-1) 127.0.0.1 - - [27/Aug/2024:21:10:13 +0300] "PUT /movies/4/UpdatedFourthMovie HTTP/1.1" 200 118
-2024-08-27 21:10:25,244 nateff C:\Program Files\Java\graalvm-community-openjdk-21.0.2+13.1\bin\java.exe[13860] INFO  [com.sum.con.MovieController] (executor-thread-1) Delete a movie with id: 4 from the database
-2024-08-27 21:10:25,250 nateff C:\Program Files\Java\graalvm-community-openjdk-21.0.2+13.1\bin\java.exe[13860] INFO  [com.sum.con.MovieController] (executor-thread-1) Movie with id: 4 found and deleted
-2024-08-27 21:10:25,269 nateff C:\Program Files\Java\graalvm-community-openjdk-21.0.2+13.1\bin\java.exe[13860] INFO  [io.qua.htt.access-log] (executor-thread-1) 127.0.0.1 - - [27/Aug/2024:21:10:25 +0300] "DELETE /movies/4 HTTP/1.1" 200 88
-2024-08-27 21:11:21,143 nateff C:\Program Files\Java\graalvm-community-openjdk-21.0.2+13.1\bin\java.exe[13860] INFO  [io.quarkus] (Quarkus Main Thread) demo-course-project stopped in 0.095s
+2024-08-27 21:24:52,108 nateff C:\Program Files\Java\graalvm-community-openjdk-21.0.2+13.1\bin\java.exe[7752] ERROR [io.qua.run.boo.StartupActionImpl] (Quarkus Main Thread) Error running Quarkus: java.lang.reflect.InvocationTargetException
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:118)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at io.quarkus.runner.bootstrap.StartupActionImpl$1.run(StartupActionImpl.java:116)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.lang.ExceptionInInitializerError
+	at java.base/jdk.internal.misc.Unsafe.ensureClassInitialized0(Native Method)
+	at java.base/jdk.internal.misc.Unsafe.ensureClassInitialized(Unsafe.java:1160)
+	at java.base/jdk.internal.reflect.MethodHandleAccessorFactory.ensureClassInitialized(MethodHandleAccessorFactory.java:300)
+	at java.base/jdk.internal.reflect.MethodHandleAccessorFactory.newConstructorAccessor(MethodHandleAccessorFactory.java:103)
+	at java.base/jdk.internal.reflect.ReflectionFactory.newConstructorAccessor(ReflectionFactory.java:200)
+	at java.base/java.lang.reflect.Constructor.acquireConstructorAccessor(Constructor.java:549)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
+	at io.quarkus.runtime.Quarkus.run(Quarkus.java:70)
+	at io.quarkus.runtime.Quarkus.run(Quarkus.java:44)
+	at io.quarkus.runtime.Quarkus.run(Quarkus.java:124)
+	at io.quarkus.runner.GeneratedMain.main(Unknown Source)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	... 3 more
+Caused by: java.lang.RuntimeException: Failed to start quarkus
+	at io.quarkus.runner.ApplicationImpl.<clinit>(Unknown Source)
+	... 16 more
+Caused by: java.lang.RuntimeException: RESTEASY003875: Unable to find a constructor that takes a String param or a valueOf() or fromString() method for jakarta.ws.rs.PathParam("updatedTitle") on public jakarta.ws.rs.core.Response com.sumerge.controller.MovieController.updateMovieWithAnotherMovie(com.sumerge.dto.MovieDTO,java.lang.Long) for basetype: com.sumerge.dto.MovieDTO
+	at org.jboss.resteasy.core.StringParameterInjector.initialize(StringParameterInjector.java:579)
+	at org.jboss.resteasy.core.StringParameterInjector.<init>(StringParameterInjector.java:508)
+	at org.jboss.resteasy.core.PathParamInjector$1.<init>(PathParamInjector.java:46)
+	at org.jboss.resteasy.core.PathParamInjector.<init>(PathParamInjector.java:45)
+	at org.jboss.resteasy.core.InjectorFactoryImpl.createParameterExtractor0(InjectorFactoryImpl.java:110)
+	at org.jboss.resteasy.core.InjectorFactoryImpl.lambda$createParameterExtractor$0(InjectorFactoryImpl.java:86)
+	at org.jboss.resteasy.core.InjectorFactoryImpl$OptionalInjections.lambda$wrap$8(InjectorFactoryImpl.java:285)
+	at java.base/java.util.Optional.orElseGet(Optional.java:364)
+	at org.jboss.resteasy.core.InjectorFactoryImpl$OptionalInjections.wrap(InjectorFactoryImpl.java:285)
+	at org.jboss.resteasy.core.InjectorFactoryImpl.createParameterExtractor(InjectorFactoryImpl.java:85)
+	at org.jboss.resteasy.core.MethodInjectorImpl.<init>(MethodInjectorImpl.java:44)
+	at org.jboss.resteasy.core.InjectorFactoryImpl.createMethodInjector(InjectorFactoryImpl.java:80)
+	at org.jboss.resteasy.core.ResourceMethodInvoker.<init>(ResourceMethodInvoker.java:130)
+	at org.jboss.resteasy.core.ResourceMethodRegistry.processMethod(ResourceMethodRegistry.java:335)
+	at org.jboss.resteasy.core.ResourceMethodRegistry.register(ResourceMethodRegistry.java:272)
+	at org.jboss.resteasy.core.ResourceMethodRegistry.addResourceFactory(ResourceMethodRegistry.java:227)
+	at org.jboss.resteasy.core.ResourceMethodRegistry.addResourceFactory(ResourceMethodRegistry.java:201)
+	at org.jboss.resteasy.core.ResourceMethodRegistry.addResourceFactory(ResourceMethodRegistry.java:184)
+	at org.jboss.resteasy.core.ResourceMethodRegistry.addResourceFactory(ResourceMethodRegistry.java:171)
+	at org.jboss.resteasy.core.ResourceMethodRegistry.addResourceFactory(ResourceMethodRegistry.java:156)
+	at org.jboss.resteasy.core.ResourceMethodRegistry.addPerRequestResource(ResourceMethodRegistry.java:81)
+	at org.jboss.resteasy.core.ResteasyDeploymentImpl.registerResources(ResteasyDeploymentImpl.java:486)
+	at org.jboss.resteasy.core.ResteasyDeploymentImpl.registration(ResteasyDeploymentImpl.java:454)
+	at org.jboss.resteasy.core.ResteasyDeploymentImpl.startInternal(ResteasyDeploymentImpl.java:162)
+	at org.jboss.resteasy.core.ResteasyDeploymentImpl.start(ResteasyDeploymentImpl.java:127)
+	at io.quarkus.resteasy.runtime.standalone.ResteasyStandaloneRecorder.staticInit(ResteasyStandaloneRecorder.java:75)
+	at io.quarkus.deployment.steps.ResteasyStandaloneBuildStep$staticInit345281060.deploy_0(Unknown Source)
+	at io.quarkus.deployment.steps.ResteasyStandaloneBuildStep$staticInit345281060.deploy(Unknown Source)
+	... 17 more
+
+2024-08-27 21:24:52,153 nateff C:\Program Files\Java\graalvm-community-openjdk-21.0.2+13.1\bin\java.exe[7752] INFO  [io.qua.dep.dev.IsolatedDevModeMain] (main) Attempting to start live reload endpoint to recover from previous Quarkus startup failure

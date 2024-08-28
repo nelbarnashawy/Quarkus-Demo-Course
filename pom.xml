@@ -155,6 +155,12 @@
             <artifactId>quarkus-hibernate-orm</artifactId>
         </dependency>
 
+        <!-- Hibernate Validator -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-hibernate-validator</artifactId>
+        </dependency>
+
         <!-- PostgreSQL Database for runtime -->
         <dependency>
             <groupId>io.quarkus</groupId>
