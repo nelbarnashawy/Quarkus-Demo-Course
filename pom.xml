@@ -202,7 +202,17 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- JWT for Authentication -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-smallrye-jwt</artifactId>
+        </dependency>
 
+        <!-- JWT Build to generate Tokens -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-smallrye-jwt-build</artifactId>
+        </dependency>
 
 
 

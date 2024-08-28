@@ -4,6 +4,8 @@ import com.sumerge.dto.MovieDTO;
 import com.sumerge.mapper.MovieMapper;
 import com.sumerge.model.Movie;
 import com.sumerge.repository.MovieRepository;
+import jakarta.annotation.security.PermitAll;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -49,6 +51,7 @@ public class MovieController {
 
     @GET
     @Path("/configInject")
+    @PermitAll
     @Produces(MediaType.TEXT_PLAIN)
     public String hello() {
         LOGGER.info("Get a hello from config injection");
@@ -57,6 +60,7 @@ public class MovieController {
 
     @GET
     @Path("/configProvider")
+    @PermitAll
     @Produces(MediaType.APPLICATION_JSON)
     public String getMessageByConfigProviderOptional() {
         LOGGER.info("Get a hello from config provider");
@@ -68,6 +72,7 @@ public class MovieController {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @PermitAll
     @Operation(operationId = "getMovies", summary = "Get all movies", description = "Get all movies from the database")
     @APIResponse(
             responseCode = "200", description = "Movies retrieved successfully",
@@ -84,6 +89,7 @@ public class MovieController {
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
+    @RolesAllowed({"admin", "user"})
     @Path("/size")
     @Operation(
             operationId = "getMovieSize",
@@ -100,6 +106,7 @@ public class MovieController {
     }
 
     @POST
+    @RolesAllowed("admin")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Operation(
@@ -126,6 +133,7 @@ public class MovieController {
 
     @PUT
     @Path("{id}/{updatedTitle}")
+    @RolesAllowed("admin")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Operation(
@@ -165,6 +173,7 @@ public class MovieController {
 
     @PUT
     @Path("/{id}")
+    @RolesAllowed("admin")
     @Transactional
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -205,6 +214,7 @@ public class MovieController {
 
     @DELETE
     @Path("{id}")
+    @RolesAllowed("admin")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Operation(
